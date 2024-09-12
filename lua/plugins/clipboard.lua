@@ -1,6 +1,6 @@
 return {
   {
-    "ibhagwan/smartyank.nvim",
-    branch =  "master",
+    'ojroques/vim-oscyank',
+    branch =  "main",
   },
 }
