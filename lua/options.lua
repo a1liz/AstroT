@@ -24,3 +24,29 @@ vim.opt.incsearch = true -- search as characters are entered
 vim.opt.hlsearch = false -- do not highlight matches
 vim.opt.ignorecase = true -- ignore case in searches by default
 vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entered
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
+vim.opt.viewoptions = "cursor,slash,unix"
+
+-- 定义 FoldUnfold 功能
+local function fold_unfold()
+local foldlevel = vim.fn.foldlevel(vim.fn.line("."))
+if foldlevel == 0 then
+    vim.cmd('echo "current fold level is zero!"')
+else
+    local foldclosed = vim.fn.foldclosed(vim.fn.line("."))
+    if foldclosed == -1 then
+    vim.cmd('normal! za') -- 折叠/展开当前行
+    else
+    vim.cmd('normal! zA') -- 展开所有嵌套折叠
+    end
+end
+end
+
+-- 注册 FoldUnfold 命令
+vim.api.nvim_create_user_command("FoldUnfold", fold_unfold, {})
+
+-- 设置按键映射
+vim.keymap.set("n", "<CR>", ":FoldUnfold<CR>", { noremap = true, silent = true })
