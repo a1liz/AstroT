@@ -48,5 +48,7 @@ keymap("x", "K", ":m '<-2<CR>gv=gv", opts)
 keymap("x", "<A-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("x", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
+keymap("n", "H", ":bprevious<CR>", { silent = true })
+keymap("n", "L", ":bnext<CR>", { silent = true })
 
 
